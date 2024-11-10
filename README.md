@@ -19,7 +19,7 @@ Clona el repositorio:
 
 
 Copiar código
-git clone https://github.com/tu-usuario/agendamiento-canchas-tenis.git
+git clone https://github.com/Jakex2018/tennis-app-test.git
 Instala las dependencias: Una vez clonado el repositorio, navega a la carpeta del proyecto e instala las dependencias:
 
 Copiar código
