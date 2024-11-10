@@ -14,7 +14,6 @@ class LoginServices {
 
   void showSnackBar(BuildContext context, String message,
       {Color backgroundColor = Colors.green}) {
-    // Usamos addPostFrameCallback para asegurarnos de que el Scaffold está disponible
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final snackbar = SnackBar(
         content: Text(message, style: const TextStyle(color: Colors.white)),
