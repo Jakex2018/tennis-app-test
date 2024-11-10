@@ -1,8 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
-/*
-   User? getCurrentUser() => _auth.currentUser;
-  String getCurrentId() => _auth.currentUser?.uid ?? '';
-   */
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:com.tennis.arshh/model/user.dart';
 import 'package:com.tennis.arshh/modules/auth/providers/user_provider.dart';
@@ -44,17 +41,16 @@ class LoginServices {
             .doc(user?.uid)
             .get();
         if (userDocument.exists) {
-          // Extraemos el nombre del usuario desde el documento de Firestore
+       
           String name = userDocument.data()?['name'] ?? 'Usuario';
 
-          // Guardamos el nombre y otros datos en SharedPreferences
           await Provider.of<UserProvider>(context, listen: false)
               .saveUserToPreferences(user!.uid, user.email!, name);
 
-          // También actualizamos el nombre en el UserProvider
+         
           Provider.of<UserProvider>(context, listen: false).setUserName(name);
 
-          // Mostrar mensaje de login exitoso
+         
           showSnackBar(context, 'Inicio de sesion exitoso',
               backgroundColor: Colors.green);
           Navigator.pushReplacement(context,
