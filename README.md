@@ -1,16 +1,32 @@
-# tennis_application
+🏸 App de Agendamiento de Canchas de Tenis
+¡Bienvenido a la app de agendamiento de canchas de tenis! Esta aplicación permite a los usuarios reservar canchas de tenis en diferentes horarios, gestionar reservas y verificar la disponibilidad de las canchas.
 
-A new Flutter project.
+🛠 Tecnologías utilizadas
+Flutter: Framework de UI para construir aplicaciones nativas de forma eficiente.
+Provider: Gestión del estado de la aplicación (para reservas, disponibilidad, etc.).
+Dart: Lenguaje de programación utilizado para el desarrollo.
+Flutter Test: Framework para pruebas unitarias y de integración.
 
-## Getting Started
+📲 Cómo instalar y ejecutar la aplicación
+Requisitos previos
+Antes de comenzar, asegúrate de tener instalados los siguientes programas:
 
-This project is a starting point for a Flutter application.
+Flutter SDK
+Dart
+Un editor de código (Recomendado: VSCode o Android Studio)
+Pasos de instalación
+Clona el repositorio:
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Copiar código
+git clone https://github.com/tu-usuario/agendamiento-canchas-tenis.git
+Instala las dependencias: Una vez clonado el repositorio, navega a la carpeta del proyecto e instala las dependencias:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Copiar código
+cd agendamiento-canchas-tenis
+flutter pub get
+Ejecuta la aplicación: Si tienes un dispositivo/emulador configurado, puedes ejecutar la app con el siguiente comando:
+
+Copiar código
+flutter run
+Esto iniciará la aplicación en el dispositivo conectado o emulador.

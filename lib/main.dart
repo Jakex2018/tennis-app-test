@@ -1,19 +1,19 @@
-import 'package:com.tennis.arshh/constant.dart';
-import 'package:com.tennis.arshh/model/courts.dart';
-import 'package:com.tennis.arshh/model/instructors.dart';
-import 'package:com.tennis.arshh/model/reserve.dart';
-import 'package:com.tennis.arshh/model/user.dart';
-import 'package:com.tennis.arshh/screens/home/home_screen.dart';
-import 'package:com.tennis.arshh/screens/welcome/welcome.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:com.tennis.arshh/config/constant.dart';
+import 'package:com.tennis.arshh/providers/court_provider.dart';
+import 'package:com.tennis.arshh/providers/instructor_provider.dart';
+import 'package:com.tennis.arshh/modules/reservation/providers/reserve_provider.dart';
+import 'package:com.tennis.arshh/modules/auth/providers/user_provider.dart';
+import 'package:com.tennis.arshh/screens/home_screen.dart';
+import 'package:com.tennis.arshh/screens/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// Import the generated file
 import 'firebase_options.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -34,25 +34,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late Future<void> initSession;
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Inicializa el UserProvider después de que el árbol de widgets se haya construido
-      Provider.of<UserProvider>(context, listen: false).initializeUser();
-    });
-
-    _checkSession();
+    initSession = _initializeSessionUser();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  Future<void> _checkSession() async {
-    // Usamos el UserProvider para verificar si el usuario está logueado
+  Future<void> _initializeSessionUser() async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
+    await userProvider.initializeUser();
     await userProvider.checkUserSession();
   }
 
@@ -63,13 +54,25 @@ class _MyAppState extends State<MyApp> {
       theme: AppTheme.lightTheme(context),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: Consumer<UserProvider>(builder: (context, userProvider, child) {
-        if (userProvider.isLogged==true) {
-          return const HomeScreen();
-        } else {
-          return const WelcomeScreen();
-        }
-      }),
+      home: FutureBuilder(
+          future: initSession,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasError) {
+              return const Center(child: Text('Error al iniciar sesión'));
+            }
+            return Consumer<UserProvider>(
+                builder: (context, userProvider, child) {
+              if (userProvider.isLogged) {
+                return const HomeScreen();
+              } else {
+                return const WelcomeScreen();
+              }
+            });
+          }),
     );
   }
 }
+

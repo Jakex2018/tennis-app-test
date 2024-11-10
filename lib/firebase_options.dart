@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -46,29 +47,29 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBEx9aSa_-5cd7pYjx_1bakOcUw7CSRc0M',
-    appId: '1:251656021155:web:0d20fbdd29550dc90b8b16',
-    messagingSenderId: '251656021155',
-    projectId: 'tennisapplication-f2829',
-    authDomain: 'tennisapplication-f2829.firebaseapp.com',
-    storageBucket: 'tennisapplication-f2829.firebasestorage.app',
+  static  FirebaseOptions web = FirebaseOptions(
+     apiKey: dotenv.env['FIREBASE_API_KEY_WEB']!,
+    appId: dotenv.env['FIREBASE_APP_ID_WEB']!,
+    messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID_WEB']!,
+    projectId: dotenv.env['FIREBASE_PROJECT_ID_WEB']!,
+    authDomain: dotenv.env['FIREBASE_AUTH_DOMAIN_WEB']!,
+    storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET_WEB']!,
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBbxgw0RjLcM3wElTX8r-56z12sSjOuOhY',
-    appId: '1:251656021155:android:fc7026bf37ba9f0e0b8b16',
-    messagingSenderId: '251656021155',
-    projectId: 'tennisapplication-f2829',
-    storageBucket: 'tennisapplication-f2829.firebasestorage.app',
+   static FirebaseOptions android = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_ANDROID']!,
+    appId: dotenv.env['FIREBASE_APP_ID_ANDROID']!,
+    messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID_ANDROID']!,
+    projectId: dotenv.env['FIREBASE_PROJECT_ID_ANDROID']!,
+    storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET_ANDROID']!,
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyASmkkqKbypNb3H8_MRFDfDqr7aQrZPzzo',
-    appId: '1:251656021155:ios:01a40ccb0431ed1e0b8b16',
-    messagingSenderId: '251656021155',
-    projectId: 'tennisapplication-f2829',
-    storageBucket: 'tennisapplication-f2829.firebasestorage.app',
-    iosBundleId: 'com.example.tennisApplication',
+  static FirebaseOptions ios = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_IOS']!,
+    appId: dotenv.env['FIREBASE_APP_ID_IOS']!,
+    messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID_IOS']!,
+    projectId: dotenv.env['FIREBASE_PROJECT_ID_IOS']!,
+    storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET_IOS']!,
+    iosBundleId: dotenv.env['FIREBASE_IOS_BUNDLE_ID']!,
   );
 }
